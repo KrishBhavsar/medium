@@ -3,7 +3,7 @@ import { userRouter } from "./routes/user";
 import { blogRouter } from "./routes/blog";
 import { cors } from "hono/cors";
 
-// Create the main Hono app
+
 const app = new Hono<{
   Bindings: {
     DATABASE_URL: string;

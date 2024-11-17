@@ -2,7 +2,6 @@ import { SignupInput } from "@krishbhavsar/medium-common";
 import axios from "axios";
 import { ChangeEvent, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { BACKEND_URL } from "../config";
 
 export const Auth = ({ type }: { type: "signup" | "signin" }) => {
   const navigate = useNavigate();
@@ -44,11 +43,13 @@ export const Auth = ({ type }: { type: "signup" | "signin" }) => {
   async function sendRequest() {
     if (!validateInputs()) return;
 
-    setLoading(true); // Start loading
+    setLoading(true); 
 
     try {
       const response = await axios.post(
-        `${BACKEND_URL}/api/v1/user/${type === "signup" ? "signup" : "signin"}`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/v1/user/${
+          type === "signup" ? "signup" : "signin"
+        }`,
         postInputs
       );
       const jwt = response.data;
@@ -64,7 +65,7 @@ export const Auth = ({ type }: { type: "signup" | "signin" }) => {
         setError("Network error, please try again later.");
       }
     } finally {
-      setLoading(false); // Stop loading once the request is complete
+      setLoading(false); 
     }
   }
 
